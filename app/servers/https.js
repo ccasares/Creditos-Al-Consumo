@@ -51,13 +51,13 @@ module.exports = function() {
       try {
         jsonRequest = {
           customer: {
-            name: n.valueWithPath(namespace + 'customer.name'),
-            surname: n.valueWithPath(namespace + 'customer.surname'),
-            DNI: n.valueWithPath(namespace + 'customer.DNI'),
+            name: n.valueWithPath(namespace + 'customer.' + namespace + 'name'),
+            surname: n.valueWithPath(namespace + 'customer.' + namespace + 'surname'),
+            DNI: n.valueWithPath(namespace + 'customer.' + namespace + 'DNI'),
           } ,
           loan: {
-            amount: n.valueWithPath(namespace + 'loan.amount'),
-            period: n.valueWithPath(namespace + 'loan.period')
+            amount: n.valueWithPath(namespace + 'loan.' + namespace + 'amount'),
+            period: n.valueWithPath(namespace + 'loan.' + namespace + 'period')
           }
         }
       } catch (ex) {
