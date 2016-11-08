@@ -35,13 +35,9 @@ module.exports = function() {
         res.status(400).send("Bad request");
       }
     } else if (req.method === 'POST') {
-
-      console.log(req.body);
-
       // Actual WS invoked
       const namespace = '';
       var doc = new xmldoc.XmlDocument(req.body);
-//      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
       var n = doc.childNamed('env:Body').childNamed(namespace + 'CreatePDFAndUpload');
 
       var jsonRequest = {};
@@ -79,9 +75,6 @@ module.exports = function() {
         misc.debug("PDF created successfully: " + JSON.stringify(resp));
         gse.getCurrentCredential('docs', 'MADRID').then( function(setup) {
           // Upload to DOCS
-
-          console.log(setup);
-
           uploadToDOCS(setup, pdfFileName, (result) => {
             sendResponse(res, result);
           });
