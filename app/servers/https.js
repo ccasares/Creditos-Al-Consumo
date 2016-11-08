@@ -44,8 +44,6 @@ module.exports = function() {
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
       var n = doc.childNamed('soapenv:Body').childNamed(namespace + 'CreatePDFAndUpload');
 
-      console.log(n);
-
       var jsonRequest = {};
 
       try {
@@ -65,9 +63,6 @@ module.exports = function() {
         sendResponse(res, result);
         return;
       }
-
-      console.log(jsonRequest);
-
       // Create PDF
       var pdfFileName = jsonRequest.customer.DNI + '.pdf';
       var html = fs.readFileSync('TemplateSolicitudDePrestamo.html', 'utf8');
@@ -104,7 +99,7 @@ module.exports = function() {
   function uploadToDOCS(setup, filename, callback) {
     const PROTOCOL    = 'https://';
     const DoCSHOST    = setup.hostname;
-    const credential  = new Buffer(setup.taskuser + ':' + setup.password).toString('base64');
+    const credential  = new Buffer(setup.username + ':' + setup.password).toString('base64');
     const UploadFile  = '/documents/api/1.1/files/data';
     const FOLDER_ID   = 'F54305B0129315851C999E0111451C1FC44E45AEDEE8';
     const delimiter   = '----';
