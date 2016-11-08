@@ -36,22 +36,23 @@ module.exports = function() {
       }
     } else if (req.method === 'POST') {
       // Actual WS invoked
+      const namespace = 'cred:';
       var doc = new xmldoc.XmlDocument(req.body);
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
-      var n = doc.childNamed('soapenv:Body').childNamed('cred:CreatePDFAndUpload');
+      var n = doc.childNamed('soapenv:Body').childNamed(namespace + 'CreatePDFAndUpload');
 
       var jsonRequest = {};
 
       try {
         jsonRequest = {
           customer: {
-            name: n.valueWithPath('customer.name'),
-            surname: n.valueWithPath('customer.surname'),
-            DNI: n.valueWithPath('customer.DNI'),
+            name: n.valueWithPath(namespace + 'customer.name'),
+            surname: n.valueWithPath(namespace + 'customer.surname'),
+            DNI: n.valueWithPath(namespace + 'customer.DNI'),
           } ,
           loan: {
-            amount: n.valueWithPath('loan.amount'),
-            period: n.valueWithPath('loan.period')
+            amount: n.valueWithPath(namespace + 'loan.amount'),
+            period: n.valueWithPath(namespace + 'loan.period')
           }
         }
       } catch (ex) {
