@@ -40,7 +40,8 @@ module.exports = function() {
       console.log(req.body);
 
       var doc = new xmldoc.XmlDocument(req.body);
-      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
+//      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
+      var n = doc.childNamed('soapenv:Body').childNamed('CreatePDFAndUpload');
 
       var jsonRequest = {};
 
