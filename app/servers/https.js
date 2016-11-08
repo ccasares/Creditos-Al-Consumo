@@ -37,6 +37,8 @@ module.exports = function() {
     } else if (req.method === 'POST') {
       // Actual WS invoked
 
+      console.log(req.body);
+
       var doc = new xmldoc.XmlDocument(req.body);
       var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
 
