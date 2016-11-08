@@ -35,11 +35,16 @@ module.exports = function() {
         res.status(400).send("Bad request");
       }
     } else if (req.method === 'POST') {
+
+      console.log(req.body);
+
       // Actual WS invoked
       const namespace = 'cred:';
       var doc = new xmldoc.XmlDocument(req.body);
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
       var n = doc.childNamed('soapenv:Body').childNamed(namespace + 'CreatePDFAndUpload');
+
+      console.log(n);
 
       var jsonRequest = {};
 
