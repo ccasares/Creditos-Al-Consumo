@@ -39,10 +39,10 @@ module.exports = function() {
       console.log(req.body);
 
       // Actual WS invoked
-      const namespace = 'cred:';
+      const namespace = '';
       var doc = new xmldoc.XmlDocument(req.body);
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
-      var n = doc.childNamed('soapenv:Body').childNamed(namespace + 'CreatePDFAndUpload');
+      var n = doc.childNamed('env:Body').childNamed(namespace + 'CreatePDFAndUpload');
 
       var jsonRequest = {};
 
