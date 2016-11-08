@@ -36,14 +36,9 @@ module.exports = function() {
       }
     } else if (req.method === 'POST') {
       // Actual WS invoked
-
-      console.log(req.body);
-
       var doc = new xmldoc.XmlDocument(req.body);
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
       var n = doc.childNamed('soapenv:Body').childNamed('cred:CreatePDFAndUpload');
-
-      console.log(n);
 
       var jsonRequest = {};
 
@@ -65,6 +60,8 @@ module.exports = function() {
         return;
       }
 
+      console.log(jsonRequest);
+
       // Create PDF
       var pdfFileName = jsonRequest.customer.DNI + '.pdf';
       var html = fs.readFileSync('TemplateSolicitudDePrestamo.html', 'utf8');
@@ -81,6 +78,9 @@ module.exports = function() {
         misc.debug("PDF created successfully: " + JSON.stringify(resp));
         gse.getCurrentCredential('docs', 'MADRID').then( function(setup) {
           // Upload to DOCS
+
+          console.log(setup);
+
           uploadToDOCS(setup, pdfFileName, (result) => {
             sendResponse(res, result);
           });
