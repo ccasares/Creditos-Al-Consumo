@@ -139,8 +139,6 @@ module.exports = function() {
 
 //    misc.debug(xmlParams);
 
-    console.log(payload);
-
     var request = https.request({
       host : PCSHOST,
       port : 443,
