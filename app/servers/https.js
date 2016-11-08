@@ -43,6 +43,8 @@ module.exports = function() {
 //      var n = doc.childNamed('env:Body').childNamed('CreatePDFAndUpload');
       var n = doc.childNamed('soapenv:Body').childNamed('CreatePDFAndUpload');
 
+      console.log(n);
+
       var jsonRequest = {};
 
       try {
