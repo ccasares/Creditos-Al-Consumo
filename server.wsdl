@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://oracle.com/credit/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://oracle.com/credit/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://oracle.com/credit/">
+      <s:element name="CreatePDFAndUpload">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="customer" type="tns:Customer" />
+            <s:element name="loan" type="tns:LoanRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatePDFAndUploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="response" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Customer">
+        <s:sequence>
+          <s:element name="name" type="s:string" />
+          <s:element name="surname" type="s:string" />
+          <s:element name="DNI" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LoanRequest">
+        <s:sequence>
+          <s:element name="amount" type="s:double" />
+          <s:element name="period" type="s:integer" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreatePDFAndUploadIn">
+    <wsdl:part name="parameters" element="tns:CreatePDFAndUpload" />
+  </wsdl:message>
+  <wsdl:message name="CreatePDFAndUploadOut">
+    <wsdl:part name="parameters" element="tns:CreatePDFAndUploadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CreatePDFSoap">
+    <wsdl:operation name="CreatePDFAndUpload">
+      <wsdl:input message="tns:CreatePDFAndUploadIn" />
+      <wsdl:output message="tns:CreatePDFAndUploadOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreatePDFSoap" type="tns:CreatePDFSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreatePDFAndUpload">
+      <soap:operation soapAction="http://oracle.com/credit/CreatePDFAndUpload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreatePDF">
+    <wsdl:port name="CreatePDFSoap" binding="tns:CreatePDFSoap">
+      <soap:address location="http://##HOSTNAME##/helpers/CreatePDFSoap" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
