@@ -68,6 +68,7 @@ module.exports = function() {
       html = html.replace('##PLAZO##', jsonRequest.loan.period);
       pdf.create(html, { format: 'Letter' }).toFile(pdfFileName, function(err, resp) {
         if (err) {
+          misc.error("Error generating PDF: " + err);
           result = "Error generating PDF";
           sendResponse(res, result);
           return;
