@@ -12,7 +12,7 @@ module.exports = function() {
   // Hosts
   global.config = {
                     apex: {
-                      hostname: 'oc-129-152-131-102.compute.oraclecloud.com',
+                      hostname: 'oc-129-152-131-103.compute.oraclecloud.com',
                       port: 9997,
                       URI: '/apex/pdb1/quickbank/{service}/setup/{demozone}'
                     },
